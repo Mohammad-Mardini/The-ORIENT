@@ -28,7 +28,10 @@ The `Integrate` object has a member `t` that is the time in gigayear of the calc
 
         x, y = result[:,:2].T
 
-**TODO:** (1) the convenience member function should accept a time and return an interpolated position or velocity (2) if `kms==True` in the constructor the velocity should be returned in km/s.
+**TODO:** 
+
+(1) the convenience member function should accept a time and return an interpolated position or velocity 
+(2) if `kms==True` in the constructor the velocity should be returned in km/s.
 
 
 Selection criteria and models
