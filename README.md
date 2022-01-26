@@ -3,6 +3,29 @@ The-ORIENT
 The ORIENT (cOsmologically deRIved timE-varyiNg Galactic poTential) is a library for integrating trajectories in time-varying gravitational potentials, derived from Milky Way analogues selected from the Illustris-TNG simulation.
 
 
+Selection criteria and models
+-----------------------------
+
+Milky Way analogues were selected from the TNG100 simulation box based on halo properties at the last snapshot (representing present day). The selection criteria were detailed in Mardini et al. ([2020](https://ui.adsabs.harvard.edu/abs/2020ApJ...903...88M/abstract)); briefly:
+
+* M<sub>200</sub> between 0.6 and 2.0×10<sup>12</sup> M<sub>⊙</sub>.
+* M<sub>stellar</sub> between 4.5 and 8.3×10<sup>10</sup> M<sub>⊙</sub>.
+* triaxiality parameter T < 0.35.
+* 40% of star particles have circularity parameter ε > 0.7.
+* disk-to-total mass ratio > 0.7
+
+123 halos satisfied the criteria, additional quality control narrowed the number down to 54 models.
+
+
+Properties of the potentials
+----------------------------
+
+Each potential (corresponding to a Galactic analogue) is modelled as a superposition of a Miyamoto–Nagai disk (corresponding to stellar particles in the cosmological simulation) and an NFW sphere (corresponding to gas and dark matter particles), and has seven time-dependent properties in total: the _θ_ and _φ_ directions of the disk’s normal vector, its mass mass _M_<sub>d</sub>, its length scales _a_ and _b_, the central density _ρ_<sub>0</sub> of the NFW component and its length scale _a_. The first column in each `.dat` file in the data folder is the snapshot number from the Illustris simulation, the second is the cosmic age, and the following are the aforementioned model parameters. All quantities are in the {kiloparsec, solar mass, gigayear} unit system.
+
+The fit procedure is described in detail in appendix A of Mardini et al. ([2020](https://ui.adsabs.harvard.edu/abs/2020ApJ...903...88M/abstract)).
+
+
+
 Usage
 -----
 
@@ -34,24 +57,3 @@ The `Integrate` object has a member `t` that is the time in gigayear of the calc
 
 (2) if `kms==True` in the constructor the velocity should be returned in km/s.
 
-
-Selection criteria and models
------------------------------
-
-Milky Way analogues were selected from the TNG100 simulation box based on halo properties at the last snapshot (representing present day). The selection criteria were detailed in Mardini et al. ([2020](https://ui.adsabs.harvard.edu/abs/2020ApJ...903...88M/abstract)); briefly:
-
-* M<sub>200</sub> between 0.6 and 2.0×10<sup>12</sup> M<sub>⊙</sub>.
-* M<sub>stellar</sub> between 4.5 and 8.3×10<sup>10</sup> M<sub>⊙</sub>.
-* triaxiality parameter T < 0.35.
-* 40% of star particles have circularity parameter ε > 0.7.
-* disk-to-total mass ratio > 0.7
-
-123 halos satisfied the criteria, additional quality control narrowed the number down to 54 models.
-
-
-Properties of the potentials
-----------------------------
-
-Each potential (corresponding to a Galactic analogue) is modelled as a superposition of a Miyamoto–Nagai disk (corresponding to stellar particles in the cosmological simulation) and an NFW sphere (corresponding to gas and dark matter particles), and has seven time-dependent properties in total: the _θ_ and _φ_ directions of the disk’s normal vector, its mass mass _M_<sub>d</sub>, its length scales _a_ and _b_, the central density _ρ_<sub>0</sub> of the NFW component and its length scale _a_. The first column in each `.dat` file in the data folder is the snapshot number from the Illustris simulation, the second is the cosmic age, and the following are the aforementioned model parameters. All quantities are in the {kiloparsec, solar mass, gigayear} unit system.
-
-The fit procedure is described in detail in appendix A of Mardini et al. ([2020](https://ui.adsabs.harvard.edu/abs/2020ApJ...903...88M/abstract)).
