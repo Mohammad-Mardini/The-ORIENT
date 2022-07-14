@@ -25,14 +25,16 @@ private:
 
 class Galaxy {
 public:
+    constexpr static unsigned num_params = 7;
     Galaxy(std::string file_name);
     void func(const std::array<double, 6> &y, std::array<double, 6> &f, const double t) const;
     std::tuple<double,double> get_time_limits() {
         return { t_min, t_max };
     }
+    std::array<double, num_params> get_fit_params(const double t);
 private:
     double t_min, t_max;
-    Interp interp[10];
+    std::array<Interp, num_params> interp;
 };
 
 std::vector<std::array<double,6>> integrate(const Galaxy &galaxy, const std::array<double,6> y0, const double t_min, const double t_max, const double stride_size, const size_t max_size);

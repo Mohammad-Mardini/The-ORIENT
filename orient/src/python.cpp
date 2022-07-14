@@ -13,7 +13,8 @@ PYBIND11_MODULE(orient, m) {
 
     py::class_<Galaxy>(m, "Galaxy")
         .def(py::init<std::string>())
-        .def("get_time_limits", &Galaxy::get_time_limits);
+        .def("get_time_limits", &Galaxy::get_time_limits)
+        .def("get_fit_params", &Galaxy::get_fit_params);
 
     m.def("integrate", [](const Galaxy &galaxy, const std::array<double,6> y0, const double t_min, const double t_max, const double stride_size, const size_t max_size)
         {

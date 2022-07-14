@@ -125,6 +125,12 @@ void Galaxy::func(const std::array<double, 6> &y, std::array<double, 6> &f, cons
     for (int i=0; i<3; i++) f[3+i] = acc_disk[i] + acc_halo[i];
 };
 
+std::array<double, Galaxy::num_params> Galaxy::get_fit_params(const double t)
+{
+    std::array<double, num_params> output;
+    std::transform(begin(interp), end(interp), begin(output), [=](Interp& interp_){return interp_(t);});
+    return output;
+}
 
 std::vector<std::array<double,6>> integrate(const Galaxy &galaxy, const std::array<double,6> y0, const double t_min, const double t_max, const double stride_size, const size_t max_size = 0)
 {
