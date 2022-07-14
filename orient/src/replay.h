@@ -32,6 +32,7 @@ public:
         return { t_min, t_max };
     }
     std::array<double, num_params> get_fit_params(const double t);
+    std::vector<std::array<double, num_params>> get_fit_params(const std::vector<double> t);
 private:
     double t_min, t_max;
     std::array<Interp, num_params> interp;

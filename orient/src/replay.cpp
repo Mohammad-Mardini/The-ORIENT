@@ -132,6 +132,13 @@ std::array<double, Galaxy::num_params> Galaxy::get_fit_params(const double t)
     return output;
 }
 
+std::vector<std::array<double, Galaxy::num_params>> Galaxy::get_fit_params(const std::vector<double> t)
+{
+    std::vector<std::array<double, num_params>> output(t.size());
+    std::transform(begin(t), end(t), begin(output), [&](const double t_){return get_fit_params(t_);});
+    return output;
+}
+
 std::vector<std::array<double,6>> integrate(const Galaxy &galaxy, const std::array<double,6> y0, const double t_min, const double t_max, const double stride_size, const size_t max_size = 0)
 {
     using namespace boost::numeric::odeint;
