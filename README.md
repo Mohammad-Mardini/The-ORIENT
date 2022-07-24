@@ -49,7 +49,7 @@ The fit procedure is described in detail in appendix A of Mardini et al. ([2020]
   - `import orient`
   - `dir(orient.Galaxy)`
  
-If everything installed properly then you should see the `get_fit_params` and `get_time_limits` attributes :grin: 
+If everything installed properly then you should see the `get_fit_params` and `get_time_limits` attributes :rocket: 
 
 
  
