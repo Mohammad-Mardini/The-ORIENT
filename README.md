@@ -1,10 +1,12 @@
+<div align="justify">
+
 The-ORIENT
 ----------
 The ORIENT (cOsmologically deRIved timE-varyiNg Galactic poTential) is a library for integrating trajectories in time-varying gravitational potentials, derived from Milky Way analogues selected from the Illustris-TNG simulation.
 
 
-Selection criteria and models
------------------------------
+:one: Selection criteria and models
+-----------------------------------
 
 Milky Way analogues were selected from the TNG100 simulation box based on halo properties at the last snapshot (representing present day). The selection criteria were detailed in Mardini et al. ([2020](https://ui.adsabs.harvard.edu/abs/2020ApJ...903...88M/abstract)); briefly:
 
@@ -17,25 +19,42 @@ Milky Way analogues were selected from the TNG100 simulation box based on halo p
 123 halos satisfied the criteria, additional quality control narrowed the number down to 54 models.
 
 
-Properties of the potentials
-----------------------------
+:two: Properties of the potentials
+----------------------------------
 
 Each potential (corresponding to a Galactic analogue) is modelled as a superposition of a Miyamoto–Nagai disk (corresponding to stellar particles in the cosmological simulation) and an NFW sphere (corresponding to gas and dark matter particles), and has seven time-dependent properties in total: the _θ_ and _φ_ directions of the disk’s normal vector, its mass mass _M_<sub>d</sub>, its length scales _a_ and _b_, the central density _ρ_<sub>0</sub> of the NFW component and its length scale _a_. The first column in each `.dat` file in the data folder is the snapshot number from the Illustris simulation, the second is the cosmic age, and the following are the aforementioned model parameters. All quantities are in the {kiloparsec, solar mass, gigayear} unit system.
 
 The fit procedure is described in detail in appendix A of Mardini et al. ([2020](https://ui.adsabs.harvard.edu/abs/2020ApJ...903...88M/abstract)).
 
 
-Installation on Mac
--------------------
+:three: Installation on fresh Mac
+---------------------------------
 - Get Xcode [https://apps.apple.com/us/app/xcode/id497799835?mt=12](https://apps.apple.com/us/app/xcode/id497799835?mt=12)
 - Get Anaconda [https://docs.conda.io/projects/conda/en/latest/user-guide/install/macos.html](https://docs.conda.io/projects/conda/en/latest/user-guide/install/macos.html)
-- Item 3
-  - Sub Item 1
-  - Sub Item 2
+- Use Anaconda to install the following packages:
+  - eigen    (you can install it by `conda install -c conda-forge eigen`) 
+  - boost    (you can install it by `conda install -c conda-forge boost`)
+  - gsl      (you can install it by `conda install -c conda-forge gsl`)
+  - pybind11 (you can install it by `conda install -c conda-forge pybind11`)
+- Download and install The-ORIENt:
+
+        git clone https://github.com/Mohammad-Mardini/The-ORIENT.git
+        cd The-ORIENT/
+        export CPATH=$CONDA_PREFIX/include:$CONDA_PREFIX/include/eigen3:$CPATH
+        python setup.py install
+        
+- Check whether you have installed it properly :sparkles: :camel:
+  - `cd`
+  - `python`
+  - `import orient`
+  - `dir(orient.Galaxy)`
+ 
+If everything installed properly then you should see the `get_fit_params` and `get_time_limits` attributes :grin: 
 
 
-Usage
------
+ 
+:four: Usage
+------------
 
 First one should load a potential model. That should be one of the `.dat` files in the data folder (`$ORIENT_INSTALLATION/data`).
 
@@ -65,3 +84,4 @@ The `Integrate` object has a member `t` that is the time in gigayear of the calc
 
 (2) if `kms==True` in the constructor the velocity should be returned in km/s.
 
+</div>
