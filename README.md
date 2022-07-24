@@ -24,24 +24,14 @@ Each potential (corresponding to a Galactic analogue) is modelled as a superposi
 
 The fit procedure is described in detail in appendix A of Mardini et al. ([2020](https://ui.adsabs.harvard.edu/abs/2020ApJ...903...88M/abstract)).
 
-Installation on Mac
-30
--------------------
-31
-- Get Xcode [https://apps.apple.com/us/app/xcode/id497799835?mt=12](https://apps.apple.com/us/app/xcode/id497799835?mt=12)
-32
-- Get Anaconda [https://docs.conda.io/projects/conda/en/latest/user-guide/install/macos.html](https://docs.conda.io/projects/conda/en/latest/user-guide/install/macos.html)
-33
-- Item 3
-34
-  - Sub Item 1
-35
-  - Sub Item 2
-36
-   
-37
-#^ two spaces
 
+Installation on Mac
+-------------------
+- Get Xcode [https://apps.apple.com/us/app/xcode/id497799835?mt=12](https://apps.apple.com/us/app/xcode/id497799835?mt=12)
+- Get Anaconda [https://docs.conda.io/projects/conda/en/latest/user-guide/install/macos.html](https://docs.conda.io/projects/conda/en/latest/user-guide/install/macos.html)
+- Item 3
+  - Sub Item 1
+  - Sub Item 2
 
 
 Usage
