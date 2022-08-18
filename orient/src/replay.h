@@ -16,11 +16,14 @@ class Interp {
 public:
     Interp(std::vector<double>& x, std::vector<double>& y);
     Interp() {}
-    inline double operator()(double x) const;
+    inline double operator()(const double x) const;
+    void freeze(const double x);
 private:
     gsl_interp_accel *acc;
     gsl_spline *spline;
     double x_min, x_max;
+    bool frozen;
+    double frozen_value;
 };
 
 class Galaxy {
@@ -33,9 +36,13 @@ public:
     }
     std::array<double, num_params> get_fit_params(const double t);
     std::vector<std::array<double, num_params>> get_fit_params(const std::vector<double> t);
+    void freeze_parameter(const int i, const double t);
+    void freeze_parameter(const std::string& name, const double t);
+    void freeze_all_parameters(const double t);
 private:
     double t_min, t_max;
     std::array<Interp, num_params> interp;
+    const std::unordered_map<std::string, int> parameter_idx_by_name;
 };
 
 std::vector<std::array<double,6>> integrate(const Galaxy &galaxy, const std::array<double,6> y0, const double t_min, const double t_max, const double stride_size, const size_t max_size);

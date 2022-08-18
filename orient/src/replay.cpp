@@ -36,11 +36,20 @@ Interp::Interp(std::vector<double>& x, std::vector<double>& y)
     gsl_spline_init(spline, x.data(), y.data(), x.size());
     x_min = x.front();
     x_max = x.back();
+    frozen = false;
+    frozen_value = 0;
 }
 
-inline double Interp::operator()(double x) const
+inline double Interp::operator()(const double x) const
 {
+    if (frozen) return frozen_value;
     return gsl_spline_eval(spline, x, acc);
+}
+
+void Interp::freeze(const double x)
+{
+    frozen_value = (*this)(x);
+    frozen = true;
 }
 
 double3 plummer(const double M, const double b, const double3& pos)
@@ -89,6 +98,15 @@ double3 miyamoto_nagai(const double M, const double a, const double b, const dou
 }
 
 Galaxy::Galaxy(std::string file_name)
+: parameter_idx_by_name({
+        {"phi",       0},
+        {"theta",     1},
+        {"m_disk",    2},
+        {"a_disk",    3},
+        {"b_disk",    4},
+        {"rho_0_nfw", 5},
+        {"b_nfw",     6}
+    })
 {
     #ifndef __APPLE__
     namespace fs = std::filesystem;
@@ -137,6 +155,28 @@ std::vector<std::array<double, Galaxy::num_params>> Galaxy::get_fit_params(const
     std::vector<std::array<double, num_params>> output(t.size());
     std::transform(begin(t), end(t), begin(output), [&](const double t_){return get_fit_params(t_);});
     return output;
+}
+
+void Galaxy::freeze_parameter(const int i, const double t)
+{
+    interp[i].freeze(t);
+}
+
+void Galaxy::freeze_parameter(const std::string& name, const double t)
+{
+    auto iter = parameter_idx_by_name.find(name);
+    if (iter != end(parameter_idx_by_name)) {
+        int i = iter->second;
+        interp[i].freeze(t);
+    } else {
+        throw std::runtime_error("Cannot find parameter `" + name + "`.");
+    }
+}
+
+void Galaxy::freeze_all_parameters(const double t)
+{
+    for (auto& param_interp : interp)
+        param_interp.freeze(t);
 }
 
 std::vector<std::array<double,6>> integrate(const Galaxy &galaxy, const std::array<double,6> y0, const double t_min, const double t_max, const double stride_size, const size_t max_size = 0)
