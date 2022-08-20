@@ -3,6 +3,7 @@
 #include <array>
 #include <gsl/gsl_spline.h>
 #include <vector>
+#include <unordered_map>
 
 void set_data_dir(const std::string &path);
 
