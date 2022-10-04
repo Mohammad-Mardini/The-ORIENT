@@ -192,6 +192,7 @@ class Orbit:
         self.e = scipy.interpolate.interp1d(.5*(t_apsis[:-1] + t_apsis[1:]), e, bounds_error=False)
         self.zmax = scipy.interpolate.interp1d(self._t_zmax, self._zmax, bounds_error=False)
         self.r_apo = scipy.interpolate.interp1d(self._t_apo, self._r_apo, bounds_error=False)
+        self.r_peri = scipy.interpolate.interp1d(self._t_peri, self._r_peri, bounds_error=False)
 
     @property
     def x(self):  return self.integrate_obj._data[:,0]
@@ -210,3 +211,6 @@ class Orbit:
     
     @property
     def vz(self): return self.integrate_obj._data[:,5]
+
+    def R(self, t):
+        return np.sqrt(self.x(t)**2 + self.y(t)**2)
