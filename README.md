@@ -83,7 +83,11 @@ The `Integrate` object has a member `t` that is the time in gigayear of the calc
   
   
   
-https://user-images.githubusercontent.com/35367221/195886245-31561727-ce2c-47c1-80bc-e2c2f48171a9.mp4
+
+https://user-images.githubusercontent.com/35367221/195886878-74d17007-24fb-4deb-b745-b27bcb361b0f.mp4
+
+
+
 
   
 **TODO:** 
