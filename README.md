@@ -80,13 +80,10 @@ The `Integrate` object has a member `t` that is the time in gigayear of the calc
 
         x, y, z = result.x,  result.y,  result.z
 
-  We also provide a tutorial for a detailed usage of the ORIENT and Gaia astrometries. Below, an animation for the stellar orbit of 2MASS~J1808$-$5104
-  
+We also provide a tutorial for detailed usage of the ORIENT library and Gaia astrometries. Below is an animation of the integrated orbit for the primordial thin disk star 2MASS J1808-5104.  
   
 
 https://user-images.githubusercontent.com/35367221/195887007-e690fcb0-842c-481a-833c-8ea710f4eaf5.mp4
-
-
 
 
 
@@ -98,3 +95,5 @@ https://user-images.githubusercontent.com/35367221/195887007-e690fcb0-842c-481a-
 (2) if `kms==True` in the constructor the velocity should be returned in km/s.
 
 </div>
+
+  
