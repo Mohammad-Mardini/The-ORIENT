@@ -78,13 +78,11 @@ The integration itself can be performed by creating an `Integrate` object like s
 
 The `Integrate` object has a member `t` that is the time in gigayear of the calculated points along the orbit. The integration results can be accessed with the square brackets operator, or with convenience member functions (always in the {kiloparsec, solar mass, gigayear} unit system). For example, to plot obtain the *x* and *y* coordinates as a function of time:
 
-        x, y = result[:,:2].T
+        x, y, z = result.x,  result.y,  result.z
 
+  We also provide a tutorial for a detailed usage of the ORIENT and Gaia astrometries. Below, an animation for the stellar orbit of 2MASS~J1808$-$5104
   
   
-  
-
-
 
 https://user-images.githubusercontent.com/35367221/195887007-e690fcb0-842c-481a-833c-8ea710f4eaf5.mp4
 
