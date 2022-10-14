@@ -88,7 +88,7 @@ Also, the library contains functions to calculate the orbital parameters (e.g., 
      zmax         = orbit.zmax(t_max+array(time_points))
      
   
-We also provide a tutorial for detailed usage of the ORIENT library and Gaia astrometries. Below is an animation of the integrated orbit for the primordial thin disk star 2MASS J1808-5104.  
+We also provide a tutorial for detailed usage of the ORIENT library and Gaia astrometries. Below is an animation of the integrated orbit for the primordial thin disk star 2MASS J1808-5104 over the past 8Gyr.  
   
 
 https://user-images.githubusercontent.com/35367221/195887007-e690fcb0-842c-481a-833c-8ea710f4eaf5.mp4
