@@ -1,12 +1,4 @@
 
-
-
-
-https://user-images.githubusercontent.com/35367221/195886245-31561727-ce2c-47c1-80bc-e2c2f48171a9.mp4
-
-
-
-
 <div align="justify">
 
 The-ORIENT
@@ -61,6 +53,7 @@ The fit procedure is described in detail in appendix A of Mardini et al. ([2020]
 If everything installed properly then you should see no error message :rocket: 
 
 
+
  
 :four: Usage
 ------------
@@ -87,6 +80,12 @@ The `Integrate` object has a member `t` that is the time in gigayear of the calc
 
         x, y = result[:,:2].T
 
+  
+  
+  
+https://user-images.githubusercontent.com/35367221/195886245-31561727-ce2c-47c1-80bc-e2c2f48171a9.mp4
+
+  
 **TODO:** 
 
 (1) the convenience member function should accept a time and return an interpolated position or velocity 
