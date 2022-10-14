@@ -112,6 +112,20 @@ Or freeze just the disk's orientation:
         galaxy.freeze_parameter('theta', t_max)
 
   
+  
+:six: Attribution
+-----------------
+If you make use of this library, please cite these two papers:
+   
+Mardini et al. ([2020](https://ui.adsabs.harvard.edu/abs/2020ApJ...903...88M/abstract))
+
+Mardini et al. ([2022](https://ui.adsabs.harvard.edu/abs/2022MNRAS.tmp.2594M/exportcitation))
+    
+
+
+
+
+-----------------
 **TODO:** 
 
 (1) the convenience member function should accept a time and return an interpolated position or velocity 
