@@ -69,16 +69,17 @@ First one should load a potential model. That should be one of the `.dat` files 
 The integration itself can be performed by creating an `Integrate` object like so (see the constructor’s docstring for more details):
 
     t_min, t_max = galaxy.get_time_limits() # Or specify manually in Gyr in between these bounds.
-    stride = 0.15  # Gyr
-    ic = [
-        120,  0,   0,      # x,  y,  z  in kpc
-        0,    40,  0       # vx, vy, vz in km/s
-    ]
-    result = orient.Integrate(galaxy, ic, t_min, t_max, stride)
+    stride       = 0.15  # Gyr
+    ic           = [
+                    120,  0,   0,      # x,  y,  z  in kpc
+                      0, 40,   0       # vx, vy, vz in km/s
+                   ]
+                   
+    result       = orient.Integrate(galaxy, ic, t_min, t_max, stride)
 
 The `Integrate` object has a member `t` that is the time in gigayear of the calculated points along the orbit. The integration results can be accessed with the square brackets operator, or with convenience member functions (always in the {kiloparsec, solar mass, gigayear} unit system). For example, to plot obtain the *x* and *y* coordinates as a function of time:
 
-        x, y, z = result.x,  result.y,  result.z
+        x, y, z  = result.x,  result.y,  result.z
 
 We also provide a tutorial for detailed usage of the ORIENT library and Gaia astrometries. Below is an animation of the integrated orbit for the primordial thin disk star 2MASS J1808-5104.  
   
