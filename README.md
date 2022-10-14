@@ -69,7 +69,8 @@ First one should load a potential model. That should be one of the `.dat` files 
 The integration itself can be performed by creating an `Integrate` object like so (see the constructor’s docstring for more details):
 
     t_min, t_max = galaxy.get_time_limits() # Or specify manually in Gyr in between these bounds.
-    stride       = 0.15  # Gyr
+    time_points  = array([-2, -4, -6, -8]) # Gyr
+    stride       = -8.0  # Gyr
     ic           = [
                     120,  0,   0,      # x,  y,  z  in kpc
                       0, 40,   0       # vx, vy, vz in km/s
@@ -79,14 +80,32 @@ The integration itself can be performed by creating an `Integrate` object like s
 
 The `Integrate` object has a member `t` that is the time in gigayear of the calculated points along the orbit. The integration results can be accessed with the square brackets operator, or with convenience member functions (always in the {kiloparsec, solar mass, gigayear} unit system). For example, to plot obtain the *x* and *y* coordinates as a function of time:
 
-        x, y, z  = result.x,  result.y,  result.z
-
+     x, y, z     = result.x,  result.y,  result.z
+  
+Also, the library contains functions to calculate the orbital parameters (e.g., Eccentricity, zmax):
+    
+     Eccentricity = orbit.e(t_max+array(time_points))
+     zmax         = orbit.zmax(t_max+array(time_points))
+     
+  
 We also provide a tutorial for detailed usage of the ORIENT library and Gaia astrometries. Below is an animation of the integrated orbit for the primordial thin disk star 2MASS J1808-5104.  
   
 
 https://user-images.githubusercontent.com/35367221/195887007-e690fcb0-842c-481a-833c-8ea710f4eaf5.mp4
 
 
+   
+:five: Control the ORIENT parameters :exploding_head: :scream:
+------------------------------------
+
+Principally, the user can force the orinet to become a time-static potential:
+  
+        galaxy.freeze_all_parameters(t_max)
+  
+Or freeze just the disk's orientation:
+
+        galaxy.freeze_parameter('phi', t_max)
+        galaxy.freeze_parameter('theta', t_max)
 
   
 **TODO:** 
