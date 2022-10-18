@@ -95,7 +95,7 @@ We also provide a tutorial for detailed usage of the ORIENT library and Gaia ast
   
 
 
-![Flower](https://user-images.githubusercontent.com/35367221/195906213-2de68c3b-3d70-431f-a21f-8d0fbbf06622.mp4)
+![](https://user-images.githubusercontent.com/35367221/195906213-2de68c3b-3d70-431f-a21f-8d0fbbf06622.mp4)
 
 
 
