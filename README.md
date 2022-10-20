@@ -91,7 +91,7 @@ Also, the library contains functions to calculate the orbital parameters (e.g., 
 
 
 
-We also provide a tutorial for detailed usage of the ORIENT library and Gaia astrometries. Below is an animation of the integrated orbit for the primordial thin disk star 2MASS J1808-5104 over the past 8Gyr.  
+We also provide a tutorial for detailed usage of the ORIENT library and Gaia astrometries. Below is an animation of the integrated orbit for the primordial thin disk star 2MASS J1808-5104 over the past 8Gyr. See Mardini et al. ([2022](https://ui.adsabs.harvard.edu/abs/2022MNRAS.tmp.2594M/exportcitation)) for more details.
   
 
 
