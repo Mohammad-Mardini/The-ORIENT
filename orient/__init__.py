@@ -76,7 +76,7 @@ class Integrate:
 
         if kms: _ic[3:] *= Integrate.kpcGyr
         self._data = orient.integrate(galaxy, _ic, t_min, t_max, stride_size, max_size)
-        if kms: self._data[3:] /= Integrate.kpcGyr
+        if kms: self._data[:,3:] /= Integrate.kpcGyr
 
         stride_count = int((t_max-t_min) / stride_size)
         if stride_count*stride_size > t_max-t_min: stride_count += 1
