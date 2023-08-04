@@ -33,7 +33,7 @@ The fit procedure is described in detail in appendix A of Mardini et al. ([2020]
 - Get Xcode [https://apps.apple.com/us/app/xcode/id497799835?mt=12](https://apps.apple.com/us/app/xcode/id497799835?mt=12)
 - Get Anaconda [https://docs.conda.io/projects/conda/en/latest/user-guide/install/macos.html](https://docs.conda.io/projects/conda/en/latest/user-guide/install/macos.html)
 - Use Anaconda to install the following packages:
-  - eigen    (you can install it by `conda install -c conda-forge eigen`) 
+  - eigen    (you can install it by `conda install -c conda-forge eigen`)
   - boost    (you can install it by `conda install -c conda-forge boost`)
   - gsl      (you can install it by `conda install -c conda-forge gsl`)
   - pybind11 (you can install it by `conda install -c conda-forge pybind11`)
