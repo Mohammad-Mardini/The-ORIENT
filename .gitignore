@@ -2,3 +2,4 @@ build
 dist
 orient.egg-info
 __pycache__
+*.so

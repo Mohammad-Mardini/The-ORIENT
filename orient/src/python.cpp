@@ -18,7 +18,12 @@ PYBIND11_MODULE(orient, m) {
         .def("get_fit_params", py::overload_cast<const std::vector<double>>(&Galaxy::get_fit_params))
         .def("freeze_parameter", py::overload_cast<const int, const double>(&Galaxy::freeze_parameter))
         .def("freeze_parameter", py::overload_cast<const std::string&, const double>(&Galaxy::freeze_parameter))
-        .def("freeze_all_parameters", &Galaxy::freeze_all_parameters);
+        .def("freeze_all_parameters", &Galaxy::freeze_all_parameters)
+        .def("gravity", [](Galaxy &galaxy, const std::array<double, 6> &y, const double t){
+            std::array<double, 6> f;
+            galaxy.gravity(y, f, t);
+            return (py::array)py::cast(f);
+        });
 
     m.def("integrate", [](const Galaxy &galaxy, const std::array<double,6> y0, const double t_min, const double t_max, const double stride_size, const size_t max_size)
         {

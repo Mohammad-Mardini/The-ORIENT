@@ -124,7 +124,7 @@ Galaxy::Galaxy(std::string file_name)
     for (int i=0; i<7; i++) interp[i] = Interp(t_data, data[i+1]);
 }
 
-void Galaxy::func(const std::array<double, 6> &y, std::array<double, 6> &f, const double t) const
+void Galaxy::gravity(const std::array<double, 6> &y, std::array<double, 6> &f, const double t) const
 {
     f[0] = y[3]; // vx -> x'
     f[1] = y[4]; // vy -> y'
@@ -184,7 +184,7 @@ std::vector<std::array<double,6>> integrate(const Galaxy &galaxy, const std::arr
     using namespace boost::numeric::odeint;
     using Coordinates = std::array<double, 6>;
     auto stepper = bulirsch_stoer<Coordinates>(1E-7, 0);
-    auto function_wrapper = [&galaxy](const Coordinates &x, Coordinates &dxdt, const double t) { return galaxy.func(x, dxdt, t); };
+    auto function_wrapper = [&galaxy](const Coordinates &x, Coordinates &dxdt, const double t) { return galaxy.gravity(x, dxdt, t); };
     size_t stride_count = (t_max-t_min) / stride_size;
     if (stride_count*stride_size > t_max-t_min) stride_count++;
     if (stride_count > max_size) stride_count = max_size;

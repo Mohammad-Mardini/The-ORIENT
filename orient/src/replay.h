@@ -31,7 +31,7 @@ class Galaxy {
 public:
     constexpr static unsigned num_params = 7;
     Galaxy(std::string file_name);
-    void func(const std::array<double, 6> &y, std::array<double, 6> &f, const double t) const;
+    void gravity(const std::array<double, 6> &y, std::array<double, 6> &f, const double t) const;
     std::tuple<double,double> get_time_limits() {
         return { t_min, t_max };
     }
