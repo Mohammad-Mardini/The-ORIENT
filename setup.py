@@ -15,7 +15,7 @@ ext_modules = [
         'orient.orient',
         glob('orient/src/*.cpp'),
         include_dirs=['orient/src'],
-        cxx_std=17,
+        cxx_std=14,
         libraries=libraries
     ),
 ]
