@@ -1,138 +1,169 @@
+# The ORIENT
 
-<div align="justify">
+**The ORIENT** (c**O**smologically de**RI**ved tim**E**-varyi**N**g Galactic po**T**ential) is a library for integrating orbits in time-varying gravitational potentials. The potentials are derived from Milky Way analogues selected from the IllustrisTNG cosmological simulation (TNG100).
 
-The-ORIENT
-----------
-The ORIENT (cOsmologically deRIved timE-varyiNg Galactic poTential) is a library for integrating trajectories in time-varying gravitational potentials, derived from Milky Way analogues selected from the Illustris-TNG simulation.
+## Contents
 
+1. [Milky Way analogues](#1-milky-way-analogues)
+2. [Potential models](#2-potential-models)
+3. [Installation](#3-installation)
+4. [Usage](#4-usage)
+5. [Controlling the time dependence](#5-controlling-the-time-dependence)
+6. [Citation](#6-citation)
+7. [Roadmap](#7-roadmap)
 
-:one: Selection criteria and models
------------------------------------
+---
 
-Milky Way analogues were selected from the TNG100 simulation box based on halo properties at the last snapshot (representing present day). The selection criteria were detailed in Mardini et al. ([2020](https://ui.adsabs.harvard.edu/abs/2020ApJ...903...88M/abstract)); briefly:
+## 1. Milky Way analogues
 
-* M<sub>200</sub> between 0.6 and 2.0×10<sup>12</sup> M<sub>⊙</sub>.
-* M<sub>stellar</sub> between 4.5 and 8.3×10<sup>10</sup> M<sub>⊙</sub>.
-* triaxiality parameter T < 0.35.
-* 40% of star particles have circularity parameter ε > 0.7.
-* disk-to-total mass ratio > 0.7
+Milky Way analogues were selected from the TNG100 box using halo properties at the final snapshot (present day). The full selection is described in [Mardini et al. (2020)](https://ui.adsabs.harvard.edu/abs/2020ApJ...903...88M/abstract). In brief:
 
-123 halos satisfied the criteria, additional quality control narrowed the number down to 54 models.
+| Property | Criterion |
+|---|---|
+| Halo mass, M<sub>200</sub> | 0.6–2.0 × 10<sup>12</sup> M<sub>⊙</sub> |
+| Stellar mass, M<sub>★</sub> | 4.5–8.3 × 10<sup>10</sup> M<sub>⊙</sub> |
+| Triaxiality parameter, T | < 0.35 |
+| Circularity | ≥ 40% of star particles with ε > 0.7 |
+| Disk-to-total mass ratio | > 0.7 |
 
+Of the 123 halos that satisfy these criteria, 54 passed additional quality control and are provided as potential models.
 
-:two: Properties of the potentials
-----------------------------------
+## 2. Potential models
 
-Each potential (corresponding to a Galactic analogue) is modelled as a superposition of a Miyamoto–Nagai disk (corresponding to stellar particles in the cosmological simulation) and an NFW sphere (corresponding to gas and dark matter particles), and has seven time-dependent properties in total: the _θ_ and _φ_ directions of the disk’s normal vector, its mass mass _M_<sub>d</sub>, its length scales _a_ and _b_, the central density _ρ_<sub>0</sub> of the NFW component and its length scale _a_. The first column in each `.dat` file in the data folder is the snapshot number from the Illustris simulation, the second is the cosmic age, and the following are the aforementioned model parameters. All quantities are in the {kiloparsec, solar mass, gigayear} unit system.
+Each potential is the superposition of two components:
 
-The fit procedure is described in detail in appendix A of Mardini et al. ([2020](https://ui.adsabs.harvard.edu/abs/2020ApJ...903...88M/abstract)).
+- a **Miyamoto–Nagai disk**, fit to the stellar particles;
+- an **NFW sphere**, fit to the gas and dark matter particles.
 
+Each model has seven time-dependent parameters. Every `.dat` file in the `data/` folder has one row per simulation snapshot, with the following columns:
 
-:three: Installation on fresh Mac
----------------------------------
-- Get Xcode [https://apps.apple.com/us/app/xcode/id497799835?mt=12](https://apps.apple.com/us/app/xcode/id497799835?mt=12)
-- Get Anaconda [https://docs.conda.io/projects/conda/en/latest/user-guide/install/macos.html](https://docs.conda.io/projects/conda/en/latest/user-guide/install/macos.html)
-- Use Anaconda to install the following packages:
-  - eigen    (you can install it by `conda install -c conda-forge eigen`)
-  - boost    (you can install it by `conda install -c conda-forge boost`)
-  - gsl      (you can install it by `conda install -c conda-forge gsl`)
-  - pybind11 (you can install it by `conda install -c conda-forge pybind11`)
-- Download and install The-ORIENt:
+| Column | Quantity |
+|---|---|
+| 1 | Illustris snapshot number |
+| 2 | Cosmic age |
+| 3 | θ, polar angle of the disk normal vector |
+| 4 | φ, azimuthal angle of the disk normal vector |
+| 5 | M<sub>d</sub>, disk mass |
+| 6 | a, disk radial scale length |
+| 7 | b, disk vertical scale length |
+| 8 | ρ<sub>0</sub>, NFW central density |
+| 9 | NFW scale length |
 
-        git clone https://github.com/Mohammad-Mardini/The-ORIENT.git
-        cd The-ORIENT/
-        export CPATH=$CONDA_PREFIX/include:$CONDA_PREFIX/include/eigen3:$CPATH
-        python setup.py install
-        
-- Check whether you have installed it properly :sparkles: :camel:
-  - `cd`
-  - `python`
-  - `import orient`
-  - Or simply `python -c "import orient"`
- 
-If everything installed properly then you should see no error message :rocket: 
+All quantities use the {kpc, M<sub>⊙</sub>, Gyr} unit system. The fitting procedure is described in Appendix A of [Mardini et al. (2020)](https://ui.adsabs.harvard.edu/abs/2020ApJ...903...88M/abstract).
 
+## 3. Installation
 
+### Requirements
 
- 
-:four: Usage
-------------
+- Python 3 with NumPy
+- A C++ compiler (on macOS, install [Xcode](https://apps.apple.com/us/app/xcode/id497799835) or the Xcode Command Line Tools)
+- [Eigen](https://eigen.tuxfamily.org), [Boost](https://www.boost.org), [GSL](https://www.gnu.org/software/gsl/), and [pybind11](https://github.com/pybind/pybind11)
 
-First one should load a potential model. That should be one of the `.dat` files in the data folder (`$ORIENT_INSTALLATION/data`).
+The simplest route is a [conda](https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html) environment:
 
+```bash
+conda install -c conda-forge eigen boost gsl pybind11 numpy
+```
 
-    galaxy = orient.Galaxy('subhalo_498768_parameters_processed.dat')
+### Build and install
 
+```bash
+git clone https://github.com/Mohammad-Mardini/The-ORIENT.git
+cd The-ORIENT
+export CPATH=$CONDA_PREFIX/include:$CONDA_PREFIX/include/eigen3:$CPATH
+pip install . --no-build-isolation
+```
 
-**Note:** currently on macOS the full path of the data file has to be specified, on Linux the relative path is sufficient. That is due to difficulty compiling with the C++ filesystem library on Mojave.
+### Check the installation
 
-The integration itself can be performed by creating an `Integrate` object like so (see the constructor’s docstring for more details):
+From any directory other than the repository:
 
-    t_min, t_max = galaxy.get_time_limits() # Or specify manually in Gyr in between these bounds.
-    time_points  = array([-2, -4, -6, -8]) # Gyr
-    stride       = -8.0  # Gyr
-    ic           = [
-                    120,  0,   0,      # x,  y,  z  in kpc
-                      0, 40,   0       # vx, vy, vz in km/s
-                   ]
-                   
-    result       = orient.Integrate(galaxy, ic, t_min, t_max, stride)
+```bash
+python -c "import orient"
+```
 
-The `Integrate` object has a member `t` that is the time in gigayear of the calculated points along the orbit. The integration results can be accessed with the square brackets operator, or with convenience member functions (always in the {kiloparsec, solar mass, gigayear} unit system). For example, to plot obtain the *x* and *y* coordinates as a function of time:
+No output means the installation succeeded.
 
-     x, y, z     = result.x,  result.y,  result.z
-  
-Also, the library contains functions to calculate the orbital parameters (e.g., Eccentricity, zmax):
-    
-     Eccentricity = orbit.e(t_max+array(time_points))
-     zmax         = orbit.zmax(t_max+array(time_points))
-     
-  
+## 4. Usage
 
+### Load a potential
 
+Choose one of the `.dat` files in `data/`:
 
-We also provide a tutorial for detailed usage of the ORIENT library and Gaia astrometries. Below is an animation of the integrated orbit for the primordial thin disk star 2MASS J1808-5104 over the past 8Gyr. See Mardini et al. ([2022](https://ui.adsabs.harvard.edu/abs/2022MNRAS.tmp.2594M/exportcitation)) for more details.
-  
+```python
+import numpy as np
+import orient
 
+galaxy = orient.Galaxy('data/subhalo_498768_parameters_processed.dat')
+```
 
-![](https://user-images.githubusercontent.com/35367221/195906213-2de68c3b-3d70-431f-a21f-8d0fbbf06622.mp4)
+> **Note (macOS):** on some macOS versions the full path to the data file is required, because the C++ `filesystem` library could not be used when compiling on Mojave. On Linux a relative path works.
 
+### Integrate an orbit
 
+Create an `Integrate` object (see its docstring for all options):
 
-   
-:five: Control the ORIENT parameters :exploding_head: :scream:
-------------------------------------
+```python
+t_min, t_max = galaxy.get_time_limits()   # or any range within these bounds (Gyr)
+stride = -8.0                              # Gyr
 
-Principally, the user can force the orinet to become a time-static potential:
-  
-        galaxy.freeze_all_parameters(t_max)
-  
-Or freeze just the disk's orientation:
+ic = [120.0,  0.0, 0.0,    # x,  y,  z  [kpc]
+        0.0, 40.0, 0.0]    # vx, vy, vz [km/s]
 
-        galaxy.freeze_parameter('phi', t_max)
-        galaxy.freeze_parameter('theta', t_max)
+result = orient.Integrate(galaxy, ic, t_min, t_max, stride)
+```
 
-  
-  
-:six: Attribution
------------------
-If you make use of this library, please cite these two papers:
-   
-Mardini et al. ([2020](https://ui.adsabs.harvard.edu/abs/2020ApJ...903...88M/abstract))
+### Access the results
 
-Mardini et al. ([2022](https://ui.adsabs.harvard.edu/abs/2022MNRAS.tmp.2594M/exportcitation))
-    
+`result.t` holds the times (Gyr) of the computed orbit points. Positions are available as convenience members, and all phase-space coordinates through the `[]` operator. Outputs are in {kpc, M<sub>⊙</sub>, Gyr} units.
 
+```python
+t = result.t
+x, y, z = result.x, result.y, result.z
+```
 
+### Orbital parameters
 
+The library also computes orbital parameters such as eccentricity and maximum height above the disk plane, evaluated at chosen look-back times:
 
------------------
-**TODO:** 
+```python
+lookback = np.array([-2, -4, -6, -8])     # Gyr
 
-(1) the convenience member function should accept a time and return an interpolated position or velocity 
+eccentricity = result.e(t_max + lookback)
+z_max        = result.zmax(t_max + lookback)
+```
 
-(2) if `kms==True` in the constructor the velocity should be returned in km/s.
+### Example
 
-</div>
+The animation below shows the integrated orbit of the primordial thin-disk star 2MASS J1808−5104 over the past 8 Gyr. See [Mardini et al. (2022)](https://ui.adsabs.harvard.edu/abs/2022MNRAS.tmp.2594M/abstract) for details. A tutorial combining The ORIENT with Gaia astrometry is included in the repository.
+
+https://user-images.githubusercontent.com/35367221/195906213-2de68c3b-3d70-431f-a21f-8d0fbbf06622.mp4
+
+## 5. Controlling the time dependence
+
+Any parameter can be held fixed at its value at a given time. To turn The ORIENT into a static potential at the present day:
+
+```python
+galaxy.freeze_all_parameters(t_max)
+```
+
+To freeze only the orientation of the disk:
+
+```python
+galaxy.freeze_parameter('theta', t_max)
+galaxy.freeze_parameter('phi', t_max)
+```
+
+## 6. Citation
+
+If you use The ORIENT in your work, please cite:
+
+- Mardini, M. K., et al. 2020, ApJ, 903, 88 · [ADS](https://ui.adsabs.harvard.edu/abs/2020ApJ...903...88M/abstract)
+- Mardini, M. K., et al. 2022, MNRAS · [ADS](https://ui.adsabs.harvard.edu/abs/2022MNRAS.tmp.2594M/abstract)
+
+## 7. Roadmap
+
+- [ ] The convenience member function should accept a time and return an interpolated position or velocity 
+- [ ] Return velocities in km/s when `kms=True` is passed to the `Integrate` constructor.
 
   
